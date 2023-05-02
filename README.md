@@ -69,15 +69,6 @@
 
 ## 2. Conditional Expressions
 
-As we see above, both branching and looping depend upon a **conditional expression**.
-
-Examples of conditional expressions:
-
-```js
-(word === secretWord)
-(numWrongGuesses > MAX_WRONG_GUESSES)
-(winner)
-```
 A conditional expression, like any JS expression, is a piece of code that evaluates to a single value/thing (object) - and **every single value/thing is truthy or falsy**.
 
 Let's take a look at what values/things are considered to be truthy and falsy...
@@ -227,78 +218,8 @@ However, because of the fact that **they always return either their left or righ
 0 && null  // evaluates to 0
 ```
 
-#### 💪 You Do - Logical Operators (1 min)
+]
 
-Jot down what each of following expressions evaluate to:
-
-<details>
-<summary>(1) <code>'cat' || 'dog'</code></summary>
-
-```js
-'cat'
-```
-</details>
-<details>
-<summary>(2) <code>false || true</code></summary>
-
-```js
-true
-```
-</details>
-<details>
-<summary>(3) <code>true && false</code></summary>
-
-```js
-false
-```
-</details>
-<details>
-<summary>(4) <code>false && true</code></summary>
-
-```js
-false
-```
-</details>
-<details>
-<summary>(5) <code>10 || 'ten'</code></summary>
-
-```js
-10
-```
-</details>
-<details>
-<summary>(6) <code>10 && 'ten'</code></summary>
-
-```js
-'ten'
-```
-</details>
-
-Note that if the expression results in the first operand being returned, JS won't even evaluate the second operand.  This "short circuiting" as it's called, can be used in interesting ways...
-
-#### 💪 You Do - Advanced Use of Logical Operators (1 min)
-
-Analyze the following two code snippets and do your best to predict what will happen based upon what values might be returned from the functions:
-
-```js
-winner = checkWinAcross() || checkWinVertical();
-```
-<details>
-<summary>View explanation for above snippet</summary>
-
-**If <code>checkWinAcross()</code> returns a truthy value, that truthy value will be assigned to <code>winner</code>, otherwise, <code>winner</code> will be assigned whatever value is returned by <code>checkWinVertical()</code>**
-
-</details>
-
-```js
-winner && handleWinner();
-```
-<details>
-<summary>View explanation for above snippet</summary>
-
-**The <code>handleWinner()</code> function will run only if <code>winner</code> holds a truthy value**
-
-</details>
 
 ## 4. Branching
 
