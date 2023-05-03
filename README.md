@@ -1,492 +1,373 @@
-<img src="https://i.imgur.com/rkCk34H.png">
+### SEIR0508
 
-# Control Flow in JavaScript
+# Control Flow & Loops
 
-## Learning Objectives
+![Loops](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FKn06785pkJg%2Fmaxresdefault.jpg&f=1&nofb=1)
 
-| Students will be able to: |
-|---|
-| Use conditional expressions with branching & looping |
-| Identify what is "truthy" and "falsy" in JavaScript |
-| Understand what the logical `\|\|` and `&&` operators return |
-| Use the `if...else` statement to perform branching |
-| Use the `for` & `while` statements to perform looping |
+## Lesson Overview
 
-## Road Map                             
+In our HTML lesson, we discussed how HTML was the skeleton of the code, while JS is the brains. Lets put this analogy to use and begin working with some logic, making our code dynamic and interactive. 
 
-1. What is Control Flow?
-2. Conditional Expressions
-3. The Logical `||` (or) and `&&` (and) Operators
-4. Branching
-5. Looping
-6. Number Guessing Game Code-Along
-7. Essential Questions
-8. Further Study
+In this lesson, we'll learn about loops in JavaScript and how to control the flow of our code!
 
-## Lesson Setup
+## Objectives
+- Learn about `if/else` and `switch` statements and contrast use-cases
+- Implement `while`-loops and understand how to break them
+- Identify the 4 components of a `for`-loop and their execution order
+- Compare the use-cases of `for` and `while`-loops
 
-1. We will use [replit.com](https://replit.com/) to work with the concepts and complete the exercises in this lesson - create a new Node.js-based Repl.
-2. Name the Repl something like "JS Control Flow"
-3. Open a tab in your browser and copy/paste this snippet into the address bar for a convenient note pad:
-    ```
-    data:text/html, <html contenteditable style="font-family: 'Lucida Console', Monaco">
-    ```
-    Bookmark it too for future use!
+## Lesson Instructions
 
-## 1. What is Control Flow?
+### Conditional Statements
 
-> #### _"The execution sequence of instructions in a program determined at run time with the use of control structures"_
+#### if...else statement
 
-### Basic Types of Control Flow
-
-- **Sequence**:
-    ```js
-    let name = prompt('Enter your name: ');
-    let city = prompt('What city do you live in? ');
-    ```
-	Statements execute one at a time in sequence.
-
-- **Branching**:
-    ```js
-    //  ↓--------- ↓ -> conditional expression
-    if (points > 100) {
-      console.log('Congrats!');
-    } else {
-      console.log('Keep playing!');
-    }
-    ```
-	Different code paths/branches are executed based upon a conditional expression.
-
-- **Looping**:
-    ```js
-    //     ↓--------- ↓ -> conditional expression
-    while (points < 100) {
-      let move = getPlayerMove();
-      points += getPoints(move);
-    }
-    ```
-	Code is repeatedly executed while a condition is truthy.
-
-## 2. Conditional Expressions
-
-A conditional expression, like any JS expression, is a piece of code that evaluates to a single value/thing (object) - and **every single value/thing is truthy or falsy**.
-
-Let's take a look at what values/things are considered to be truthy and falsy...
-
-### What is `true`/truthy & What is `false`/falsy?
-
-A "truthy" value is a value that is considered to be `true` when used in a conditional expression such as that used in an `if` statement. Similarly, a "falsy" value is a value that is considered to be `false`.
-
-Why this _truthy_ and _falsy_ business? Why not just `true` and `false`?
-
-**Answer:** The ability to use non-boolean expressions as booleans (`true` or `false`) allows us to write code that is more concise.
-
-To test what is truthy and what is falsy, let's type the following code into replit:
+`if` statements are an extremely common way to manage application logic —— what happens when, etc.
 
 ```js
+if (/* whatever's in here is true */) {
+  // this code runs
+}
+```
+
+... means run the `code` block if `expr` is truthy
+
+```javascript
 if (true) {
-  console.log('truthy!');
+  console.log('Hello')
+}
+
+if (1 > 0) {
+  console.log('World')
+}
+//=> Hello
+//=> World
+```
+
+If we want to have a response to a Falsey measurement, we use an "Else" command. Else commands do not get any additional arguments, they are Catch statements that will run if the If condition is not met
+
+```js
+let age = 20
+
+if (age >= 18) {
+console.log('you can vote')
 } else {
-  console.log('falsy!');
+console.log('you can not vote')
 }
+
 ```
 
-<details>
-<summary>
-❓ As written above, clicking Replit's [Run] button will always print what to the console?
-</summary>
-
-**`'truthy!'` because the `if` statement's conditional expression has the value `true`**
-
-</details>
-
-Now we can easily test expressions by typing it in the place of `true`... 
-
-For example, the number `3`, is considered to be _truthy_ - let's try it and see.
-
-#### Everything in JS is truthy except for the following six things:
-
-1. `false` (of course)
-2. The `null` data type
-3. The `undefined` data type
-4. The empty string `''`
-5. The number `0` (zero)
-6. `NaN` (special number)
-
-**If it's not in the above list, it's truthy!**
-
-### The Not Operator
-
-The _not operator_ (`!`), also known as the "bang" operator, "flips" a true/truthy expression to the boolean value of `false`, and vice-versa.  For example:
-
-```js
-!false === true // true
-!null === true // true
-!3 === false // true
-!'' === true // true
-```
-
-A double `!` operator is a great way to force an expression into its actual boolean value of `true` or `false`:
-
-```js
-console.log(!!3); // outputs true
-```
-
-### Boolean Logic <small> (Comparison Operators)</small>
-
-Comparison Operators are used to compare the values of left and right operands which can be variables, literal values, object properties, etc.:
-
-| Operator | Purpose |
-|---|---|
-| **`===`** | strict equality - best practice |
-| **`==`** | performs type conversion (called coercion) - its use is not recommended |
-| **`!==`** | strict inequality |
-| **`!=`** | inequality |
-| **`<`** | less than |
-| **`>`** | greater than |
-| **`<=`** | less than or equal |
-| **`>=`** | greater than or equal |
-
-In your pre-work you saw a `for` loop use the `<` comparison operator to ensure that the looping variable, `i`, didn't exceed an array's upper bound...
-
-```js
-for (let i = 0; i < array.length; i++) {
-  // statement block
-}
-```
-
-### ❓ Review Questions - Conditional Expressions (1 min)
-
-<details>
-<summary>
-(1) Is the value of <code>0</code> (zero) truthy or falsy?
-</summary>
-
-**falsy**
-
-</details>
-
-<details>
-<summary>
-(2) Is an empty string truthy or falsy?
-</summary>
-
-**falsy**
-
-</details>
-
-<details>
-<summary>
-(3) Is an "empty" object (an object with no properties) truthy or falsy?
-</summary>
-
-**truthy**
-
-</details>
-
-<details>
-<summary>
-(4) What the expression <code>!!0</code> evaluate to?
-</summary>
-
-**`false`**
-
-</details>
-
-## 3. The Logical `||` (or) and `&&` (and) Operators
-
-The logical operators **`||`** and **`&&`** can be used to combine multiple conditional expressions like this:
-
-```js
-if (num < 1 || num > 10) {
-  console.log('Number is not between 1 and 10 inclusive');
-}
-```
-However, because of the fact that **they always return either their left or right operands** they can be used in other ways as well...
-
-**The logical `||` (OR) operator** always returns the first operand if it is truthy, otherwise return the second operand:
-
-```js
-'hello' || 'goodbye'  // evaluates to 'hello'
-0 || null  // evaluates to null
-```
-
-**The logical `&&` (AND) operator** always returns the first operand if it is falsy, otherwise return the second operand:
-
-```js
-'hello' && 'goodbye'  // evaluates to 'goodbye'
-0 && null  // evaluates to 0
-```
-
-]
 
 
-## 4. Branching
+When you need to test more than one case, you may use `else if`:
 
-As you saw in the pre-work, the `if..else` statement allows us to conditionally execute code.
+```javascript
+const dayOfWeek = 'Monday';
 
-### The `if` Statement <small> (Single Path)</small>
-
-```js
-// Assume char holds a character inputted by the user
-if ('aeiou'.includes(char)) {
-  console.log('char is a vowel!');
-}
-```
-
-> Again, the conditional expression must be surrounded by parens.
-
-If you have only a single statement that needs to execute, you can write that statement without using curly braces (used to define a block of statements):
-
-```js
-// This code is functionally identical to the above code
-if ('aeiou'.includes(char)) console.log('char is a vowel!');
-```
-
-### The `if...else` Statement <small> (Dual Path)</small>
-
-When you verbalize logic using language like:
-
-> "If _something_ is true do _this_, otherwise, do _that_"
-
-The `if`/`else` statement is your go to: 
-
-```js
-// Assume winner holds true or false
-if (winner) {
-  console.log('Game has been won!');
+if (dayOfWeek === 'Monday') {
+  console.log('Its Monday, better get to class!');
+} else if (dayOfWeek === 'Saturday') {
+  console.log('Its Saturday, party on!');
 } else {
-  console.log('Keep playing!');
+  console.log(`Please enter another day!`);
 }
+
+//=> Its Monday, better get to class!
 ```
 
-### The `if...else...if` Statement <small> (Three or More Paths)</small>
+![cat](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F5LU6ZcEGBbhVS%2Fgiphy.gif&f=1&nofb=1)
 
-If you have three or more code paths use `if` with as many `else if` clauses as necessary and optionally a final `else`:
+When you're comparing variables to values, make sure you're using  `===` or `==` —— not `=`. If you use `=`, you're reassigning the variable, instead of checking it for equality and it will _always_ come back true.
 
+#### Independent Practice!!
+
+
+Let's see if you have enough money to buy a cat! Using the following terms, create an `if / else if / else` conditional statement:
+
+- If `yourMoney` is equal to `catPrice`, log the message "You have just enough to buy a cat!"
+- If `yourMoney` is more than `catPrice`, log the message "You can buy a cat and will have <X> dollars left over"
+- If `yourMoney` is less than `catPrice`, log the message "You cannot buy a cat.  You need <X> more dollars :("
+
+Check your code with the following variables (Remember, you can use Node to run the file in your terminal: `node control-flow.js`)
+
+1) 
 ```js
-if (guessNum < secretNum) {
-  console.log('Guess higher!');
-} else if (guessNum > secretNum) {
-  console.log('Guess lower!');
+const yourMoney = 50
+const catPrice = 100
+```
+
+2) 
+```js
+const yourMoney = 100
+const catPrice = 100
+```
+
+3) 
+```js
+const yourMoney = 200
+const catPrice = 100
+```
+
+If you get stuck, talk to your neighbor and see if you can work it out.
+
+## Working with Multiple conditons
+  
+We can use our Logical Operators as well to compare data.
+  
+
+&& = And operator - Both conditions are required
+|| = Or operator - Only 1 is required
+! = Bang operator - Tests the Boolean opposite of the value (True->False or False -> True)
+
+Caveat - We have to specify each variable each time we compare - We can not say 
+  
+  ```js 
+  if (age > 20 && =< 13) {
+      console.log('you are teenager`)
+    }
+ ```
+    
+ We need to explicitally state both things we are comparing:
+ 
+    ```js
+    if ( age > 20 && age =<13) {
+    console.log('you are a teenager
+    ```
+                        
+ This can be a bit repetitive, but it gives us full control of everything we are measuring, and prevents the computer from mixing up variables and conditions!                 
+                  
+    
+  
+```javascript
+const dayOfWeek = 'Monday';
+
+if (dayOfWeek === 'Monday' || dayOfWeek === 'Wednesday' ) {
+  console.log(`Its ${dayOfWeek}, better get to class!');
+} else if ( dayOfWeek === 'Tuesday'|| dayOfWeek === 'Thursday || 'dayOfWeek === 'Friday') {
+  console.log(` Today is ${dayOfWeek}, no class tonight!'); 
+} else if ( dayOfWeek === 'Saturday'|| dayOfWeek === 'Sunday') {
+  console.log('Its the weekend!!');
 } else {
-  console.log('You guessed the number!');
+  console.log(`Please enter another day!`);
 }
+
+//=> Its Monday, better to get to class!
 ```
 
-FYI, a final `else` is not mandatory and can be skipped if your app's logic doesn't need it.
-
-### 👉 You Do - Branching (5 mins)
-
-Write the `if...else..if` statement that console.logs the following based upon the value of a variable named `color`:
-
-- If the value is `'green'`, log `'Go'`
-- If the value is `'yellow'`, log `'Slow'`
-- If the value is `'red'`, log `'Stop'`
-- If the value is anything else, log `'Whatever'`
-
-> Hint: Don't forget to declare and initialize a variable named `color` BEFORE the `if...else...if`.
-
-## 5. Looping
-
-Looping statements provide us with the ability to execute a block of code multiple times while a conditional expression remains truthy.
-
-We'll take a look at these statements:
-
-- **`for`**: Used to iterate a known number of times
-- **`while`**:  Used to iterate an undetermined number of times
-
-### Looping - `for` loop
-
-`for` loops are commonly used to run a block of code a certain number of times:
 
 ```js
-let upTo = prompt('Iterate from 1 to ?');
-upTo = parseInt(upTo);
-for (let n = 1; n <= upTo; n++) {
-  console.log('Current number: ', n);
+let dayOfWeek = 'Monday'
+let time = 7
+
+if (dayOfWeek == 'Monday' || dayOfWeek == 'Wednesday' && time >= 6 && time <=9) {
+console.log ('Class is in sessison! }
+else {
+console.log('no class right now!)
 }
+
 ```
 
-Notice the `for` loop has three parts after the `for` keyword:
-
-1. The _initializer_ which runs only once before looping begins. It is used to declare and initialize a looping variable.
-2. The _condition_ which will be evaluated before each loop. If truthy, the code block will execute.
-3. The last part will execute after each loop and is typically used to increment or decrement the looping variable by one or more units.
-
-### Looping - `while` Statement
-
-The `while` loop is the go to when the number of iterations is **unknown** and has the following syntax:
-
+We can use our Bang Operator to test the boolean opposite. In this case, we are testing if our name is NOT one of our instructors
+                                                                             
+                                                                             
 ```js
-while (/* conditional expression */) {
-  // statement block
-}
+if (dayOfWeek != 'Saturday' || dayOfWeek != 'Sunday'){
+	console.log{'it is a weekday, better get to class!')									       
+									   
 ```
 
-<details>
-<summary>
-❓ What determines when the looping will end?
-</summary>
-
-**When the conditional expression evaluates to a falsy value**
-
-</details>
-
-> **Beware of infinite loops!** If the conditional expression fails to sooner or later evaluate to a `falsy` value, the loop will continue endlessly.  This often results in the computer being unresponsive.  Another way to exit the loop is with the break statement (see the Further Study section).
-
-## 6. Number Guessing Game Code-Along
-
-Let's use branching and looping to code a simple number guessing game!
-
-Before coding programs it's often beneficial to [pseudocode](https://en.wikipedia.org/wiki/Pseudocode), i.e., write down the logic/steps in plain language that are necessary to solve the problem at hand...
-
-```js
-// 1. Generate a random secret number
-// 2. Declare a variable to hold the player's guess
-// 3. Loop while the player's guess is not correct
-  // 3.1. Prompt for the player's guess
-  // 3.2. Convert the player's input into a number
-  // 3.3. If the guess is lower or higher than the secret 
-  //      number, print a message that informs the player as such
-// 4. Print a message congratulating the player
-```
-
-Let's copy/paste the above pseudocode and use it as our guide as we implement the code.
-
-<details>
-<summary>
-For reference, here's a potential solution...
-</summary>
-
-```js
-// 1. Generate a random secret number
-// Using a "constant" helps document the code
-// and make it more maintainable
-const MAX_NUM = 100;
-// Adding 1 makes the number one-based instead of zero-based
-const secretNum = Math.floor(Math.random() * MAX_NUM) + 1;
-// 2. Declare a variable to hold the player's guess
-let guessNum;
-// 3. Loop while the player's guess is not correct
-while (guessNum !== secretNum) {
-  // 3.1. Prompt for the player's guess
-  guessNum = prompt('Enter your guess: ');
-  // 3.2. Convert the player's input into a number
-  guessNum = parseInt(guessNum);
-  // It's also possible to do the above on with a single line
-  // guessNum = parseInt(prompt('Enter your guess: '));
-  // 3.3. If the guess is lower or higher than the secret 
-  //      number, print a message that informs the player as such
-  if (guessNum < secretNum) {
-    console.log('Your guess was too low - try again!');
-  } else if (guessNum > secretNum) {
-    console.log('Your guess was too high - try again!');
-  }
-}
-// 4. Print a message congratulating the player
-console.log('Congrats, you guessed the secret number!');
-```
-</details>
-
-
-### Bonus Challenge
-
-As a stretch bonus challenge, consider adding the following features on your own:
-
-1. Let the player input the maximum value of the secret number.
-2. Keep track of the number of wrong guesses and print a message if that number exceeds a predetermined maximum amount.
-
-## 7. ❓ Essential Questions
-
-<details>
-<summary>
-(1) The three primary types of control flow are:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A) Sequence<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B) ___________<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C) ___________
-</summary>
-
-**A) Sequence &nbsp;&nbsp; B) Branching &nbsp;&nbsp; C) Looping**
-
-</details>
-
-<details>
-<summary>
-(2) What does the expression <code>'happy' || 'sad'</code> return?
-</summary>
-
-**`'happy'`**
-</details>
-
-<details>
-<summary>
-(3) If we don't know in advance how many times we need to iterate, we should use a ___________ loop.
-</summary>
-
-**`while` loop**
-</details>
-
-## 8. Further Study
 
 ### Ternary Operator
 
-The _ternary_ operator is ideal when you need to return one of two values depending upon a condition:
+`(condition) ? ifTrue : ifFalse`
 
-```js
-let message = score > 100 ? "You rock!" : "Keep trying!";
-```
-	
-The above one line of code replaces this code:
-	
-```js
-let message;
-if (score > 100) {
-  message = "You rock!";
+JavaScript has a ternary operator for quick conditional expressions. Where an `if ... else` **statement** conditionaly runs code, a ternary is used to make an **expression** which returns a value conditionally. Consider the difference when distinguishing between a statement and an expression:
+
+```javascript
+
+if (age >= 18) {
+  canVote = 'yes'
 } else {
-  message = "Keep trying!";
+  canVote = 'no'
+}
+
+console.log(allowed)
+```
+
+```javascript
+const age = 12
+
+age > 18 ? console.log('can vote') : console.log('can not vote')
+
+
+```
+
+
+
+
+![switch](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F6328%2Fscreenshots%2F787974%2Fswitch_animation.gif&f=1&nofb=1)
+
+### Switch Statement
+
+The switch statement can be used for multiple branches based on `===` equality:
+
+```javascript
+const food = 'fish';
+
+switch(food) {
+  case 'chicken':
+    console.log('Ill have the Chicken Parmesean');
+    break;
+  case 'steak':
+    console.log('The steak please, medium rare');
+    break;
+  case 'fish':
+    console.log('I think Ill try the Salmon');
+    break;
+  default:
+    console.log('please enter a valid entree');
+}
+
+```
+
+In this case the `switch` statement compares `food` to each of the cases (`steak` and `chicken`), and evaluates the expressions beneath them if there is a match. (Using `===` to evaluate equality)
+
+The default clause is technically optional but in most cases it is good practice to include one.
+
+
+### Iteration
+
+#### [`while`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/statements/while) loops
+
+`while` is a loop statement that will run while a condition evaluates to truthy.
+**WARNING** if your `while` loop never evaluates to falsy you may be stuck in an infinite loop! Like this:
+
+![Loop](https://thumbs.gfycat.com/ScarceIllHapuka-size_restricted.gif)
+
+```javascript
+let n = 0
+while (n < 50) {
+  console.log(n)
+  n++
+}
+
+```
+
+>note: remember that `n++` is the equivolent of `n = n + 1`, so basically it makes `n`'s value increase by 1 each time you loop through the code.
+
+You can also `break` to exit the loop before the condition is met.
+
+```javascript
+let n = 0
+while (n < 50) {
+  console.log(n)
+  if (n === 42) {
+    break
+  }
+  n++
 }
 ```
 
-A ternary can also be used to evaluate one of two expressions, so you can actually run a method if you'd like:
+#### [`for`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/statements/for) loops
 
-```js
-score > 100 ? gameWinner() : gameLoop();
-```
+`for` loops contain 4 components:
+- _initialization_ (e.g. `let i = 0;`)
+- _test condition_ (e.g. `i < 10;`)
+- _final expression_ or _incrementor_ (e.g. `i++`)
+- _block_ (e.g. `console.log(i)`)
 
-> Note that unlike with `if` and `while`, ternary expressions do not require the conditional expression to be within parenthesis.
+Notice these components all exist in our `while` example above. A `for` loop is just a specialized while loop since the pattern is so common.
 
-### `switch` Statement
-
-Look into using the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement instead of `if...else` if you have more than three code paths and your conditionals always check the same variable.
-
-### `do`...`while`
-
-You may choose to use the `do...while` statement instead of `while` to force the code block to always execute at least once.  This is rarely used, but useful to recognize when reading other developer's code.
-
-```js
-let num = 0;
-do {
-  console.log(num + ' is even');
-  num += 2;
-} while (num <= 10);
-```
-
-**Do you see why the code block will always run at least once?**
-
-Again, beware of infinite loops!
-
-### The `break` & `continue` Statements
-
-The [break statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break) is used to immediately exit a `while` or `for` loop. For example:
-
-```js
-let word = '';
-let words = [];
-while (true) {
-  word = prompt('Enter a word ("end" to quit)');
-  if (word === 'end') break;
-  words.push(word);
-  console.log("You've entered: " + words.join(', '));
+```javascript
+// start at i = 0; continue while i < 10; add 1 to i after each iteration
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+  // do more stuff
 }
 ```
-> Note again how the `if` statement does not require braces since there's a single statement to execute.
+What will we see when running the above snippet?
+What is the final value of `i`?
 
-The [continue statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/continue) skips remaining code in the current iteration and returns to the top of the `while` or `for` loop.
+```javascript
+let i = 0;
+while(i < 10) {
+  console.log(i);
+  // do more stuff
+
+  i++;
+}
+```
+
+We can implement something similar to a `for` loop with a `while` loop.
+
+### Looping through Arrays
+One of the most common ways that we'll use loops in real life is by looping through arrays.
+
+```javascript
+const food = ['tacos', 'burritos', 'pizza', 'soup', 'pasta']
+```
+Now we iterate over the food array.
+
+```javascript
+for(let i = 0; i < food.length; i++) {
+  console.log(food[i])
+}
+```
+
+and adding in our String Literals to them:
+ 
+  
+```  
+  for(let i = 0; i < food.length; i++) {
+  console.log(`lets have ${food[i]} for dinner tonight!`)
+}
+ ```
+  
+![Sort](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi0.wp.com%2Fsweatpantsandcoffee.com%2Fwp-content%2Fuploads%2F2017%2F05%2FBeing-Diagnosed-is-like-Being-Sorted-6.gif%3Fresize%3D500%252C215&f=1&nofb=1)
+
+Now for something a bit more challenging, looping through an array of objects, which we'll work on more next week. For example, let's say that we have the following array of wizards:
+
+```
+             
+            
+const wizards = [
+  {name: "Harry Potter", house: "Gryffindor"}, 
+  {name: "Lord Voldomort", house: "Slytherin"}, 
+  {name: "Cedric Diggory", house: "Hufflepuff"},
+  {name: "Luna Lovegood", house: "Ravenclaw"},  
+  {name: "Albus Dumbledor", house: "Gryffindor"}, 
+  {name: "Merlin", house: "Slytherin"}, 
+  {name: "Pomona Sprout", house: "Hufflepuff"}, 
+  {name: "Gilderoy Lockheart", house: "Ravenclaw"}, 
+  {name: "Ron Weasley", house: "Gryffindor"}, 
+  {name: "Severus Snape", house: "Slytherin"}, 
+  {name: "Nymphadora Tonks", house: "Hufflepuff"}, 
+  {name: "Padma Patil", house: "Ravenclaw"}, 
+  {name: "Hermoine Granger", house: "Gryffindor"} 
+ ]
+ ```
+ 
+If we wanted to print the name of each wizard, we could use a `for loop` to iterate through this array. To do so, we use `i` to correspond to the `index` number of each object in the array:
+```
+for(let i = 0; i < wizards.length; i++){
+    console.log(wizards[i].name)
+}
+```
+
+#### How could we combine an `if` statement with a `for loop` to print only the names of Slytherins?
+
+![Yay](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FcYYx0b3DcYwOA%2Fgiphy.gif&f=1&nofb=1)
+
+### Some things to ponder...
+  - When would use conditionals? What are the different ways to tackle conditional logic?
+  - What can we use `for` and `while` loops to accomplish?
+  - How do we choose between using a `for` or a `while` loop?
+
+## Lesson Recap
+In this lesson, we learned about if statements, ternary operators, and using loops to control the flow of data in our code.
+
+## Resources
+  - [if...else](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
+  - [for Loops](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/statements/for)
+  - [while Loops](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/statements/while)
+
