@@ -121,11 +121,11 @@ We can use our Logical Operators as well to compare data.
 
 Caveat - We have to specify each variable each time we compare - We can not say 
   
-  ```js 
+ ```js 
   if (age > 20 && =< 13) {
       console.log('you are teenager`)
     }
- ```
+```
     
  We need to explicitally state both things we are comparing:
  
