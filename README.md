@@ -195,9 +195,9 @@ console.log(allowed)
 ```
 
 ```javascript
-const age = 12
+const ageInYears = 12
 
-age > 18 ? console.log('can vote') : console.log('can not vote')
+ageInYears > 18 ? console.log('can vote') : console.log('can not vote')
 
 
 ```
