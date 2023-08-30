@@ -128,11 +128,11 @@ Caveat - We have to specify each variable each time we compare - We can not say
 ```
     
  We need to explicitally state both things we are comparing:
- 
-    ```js
+
+```js
     if ( age > 20 && age =<13) {
     console.log('you are a teenager
-    ```
+ ```
                         
  This can be a bit repetitive, but it gives us full control of everything we are measuring, and prevents the computer from mixing up variables and conditions!                 
                   
@@ -159,13 +159,20 @@ if (dayOfWeek === 'Monday' || dayOfWeek === 'Wednesday' ) {
 let dayOfWeek = 'Monday'
 let time = 7
 
-if (dayOfWeek == 'Monday' || dayOfWeek == 'Wednesday' && time >= 6 && time <=9) {
+if (time >= 6 && time <=9 && dayOfWeek == 'Monday' || dayOfWeek == 'Wednesday' ) {
 console.log ('Class is in sessison! }
 else {
 console.log('no class right now!)
 }
 
 ```
+
+But we'll quickly see how important (and annoying) the order of these can be. If you run
+```js
+ (dayOfWeek == 'Monday' || dayOfWeek == 'Wednesday' && time >= 6 && time <=9) 
+```
+instead of the previous version, it will read that Or operator before it gets to the And, which means that it will **Always** run true if it is Monday, no matter the time. Which will cause a lot of problems we don't want!
+
 
 We can use our Bang Operator to test the boolean opposite. In this case, we are testing if our name is NOT one of our instructors
                                                                              
